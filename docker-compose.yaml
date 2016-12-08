@@ -7,9 +7,6 @@ services:
       - 'POSTGRES_PORT=5432'
       - 'PORT=3000'
     image: 'fanney13/tictactoe:${GIT_COMMIT}'
-    build:
-      context: '.'
-      dockerfile: 'Dockerfile'
     ports:
       - '3000:3000'
     depends_on:

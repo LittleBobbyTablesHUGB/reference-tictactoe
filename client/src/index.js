@@ -1,4 +1,4 @@
-window.console.debug = window.console.log;
+//window.console.debug = window.console.log;
 
 import inject from './common/framework/inject';
 import React from 'react';
