@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#Stoppar allt strax, ef villa kemur upp
+#Everything stops if fails
 set -e
-#Stoppar í 10 sek á meðan Dokcerfile er að vinna
+#Stops for 10 sek while Dokcerfile is working
 echo "SLEEP"
 sleep 10
 npm run migratedb-prod

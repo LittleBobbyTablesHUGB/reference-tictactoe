@@ -1,8 +1,8 @@
 !/bin/bash
 
 echo Cleaning... 
-rm -rf ./build #Eyðir nýjasta buildi
-#Merkir image-ið í docker með því sama og er á Git
+rm -rf ./build #deletes latest build
+#Tags the image in docker with the same tag as in Git
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
   export GIT_URL=$(git config --get remote.origin.url)
@@ -15,14 +15,14 @@ export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 echo Building app
 npm run build
 #npm run start
-#Skrifar út ef buildið failar
+#Echo/Writes  when npm build failes
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Npm build failed with exit code " $rc
     exit $rc
 fi
 
-#Taggið á image-inu er sett í tímabundna textaskrá
+#Githash copied to txt file
 
 cat > ./build/githash.txt <<_EOF_
 $GIT_COMMIT
@@ -32,7 +32,7 @@ cat > ./build/.env << _EOF_
 GIT_COMMIT=$GIT_COMMIT
 _EOF_
 
-#Html skjal búil til
+#Html file made
 cat > ./build/public/version.html << _EOF_
 <!doctype html>
 <head>
@@ -56,7 +56,7 @@ echo Building docker image
 
 docker build -t fanney13/tictactoe:$GIT_COMMIT .
 
-#Villuskilaboð ef build eða push failar
+#Error message if build or push failes
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker build failed " $rc

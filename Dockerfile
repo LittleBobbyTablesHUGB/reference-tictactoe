@@ -1,13 +1,12 @@
-#Segir til um hvaðan image-ið er að koma
-FROM node 
-#Mappa sem heldur utan um kóða    
+#Tells you where the image is from
+FROM node    
 WORKDIR /code
-#Kóperar allt inn í buildið
+#Copies all into build
 COPY . .
-#Node á að keyrast úr þeirri möppu sem ég er í núna
+#Node runs from current folder
 ENV NODE_PATH . 
-#Installar dependencies
+#Installs dependencies
 RUN npm install --silent
 EXPOSE 3000
-#Vísar í migrateScriptuna
+#Defiines the command to run
 CMD ["./migrateScript.sh"]
