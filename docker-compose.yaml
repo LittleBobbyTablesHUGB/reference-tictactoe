@@ -10,7 +10,7 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - 'postgres'
+      - 'postgres' #Server er háður því að postgres sé uppi og keyrandi
     links:
       - 'postgres'
   postgres:
@@ -19,3 +19,5 @@ services:
     image: postgres
     ports:
      - "5432:5432"
+
+#Segir okkur að þetta keyrist á productionmode, hostinn er postgres. 
