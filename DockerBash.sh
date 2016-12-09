@@ -2,6 +2,10 @@
 
 echo Cleaning... 
 rm -rf ./build #deletes latest build
+cd client
+npm install 
+cd ..
+npm install
 #Tags the image in docker with the same tag as in Git
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
