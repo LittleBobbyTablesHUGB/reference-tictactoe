@@ -1,5 +1,4 @@
-!/bin/bash
-
+#!/bin/bash
 echo Cleaning... 
 rm -rf ./build #deletes latest build
 npm install
