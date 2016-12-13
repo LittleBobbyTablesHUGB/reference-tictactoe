@@ -1,11 +1,11 @@
 #!/bin/bash
 ls ./archive -a
 echo 'Copy Docker Compose to AWS'
-scp -o StrictHostKeyChecking=no -i "TicTacKey.pem" ./docker-compose.yaml ec2-us$
+scp -o StrictHostKeyChecking=no -i "TicTacKey.pem" ./archive/docker-compose.yaml ec2-us$
 :~/docker-compose.yaml
 
 
-scp -o StrictHostKeyChecking=no -i "TicTacKey.pem" ./docker-compose-and-run.sh $
+scp -o StrictHostKeyChecking=no -i "TicTacKey.pem" ./archive/docker-compose-and-run.sh $
 :~/docker-compose-and-run.sh
 
 
