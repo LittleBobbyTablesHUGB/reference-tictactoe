@@ -2,11 +2,11 @@
 ls ./archive -a
 echo 'Copy Docker Compose to AWS'
 scp -o StrictHostKeyChecking=no -i "TicTacKey.pem" ./archive/docker-compose.yaml ec2-us$
-:~/docker-compose.yaml
+:~/.
 
 
 scp -o StrictHostKeyChecking=no -i "TicTacKey.pem" ./archive/.env $
-:~/.env
+:~/.
 
 
 echo 'Connect to AWS'
