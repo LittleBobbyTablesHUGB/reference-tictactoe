@@ -8,7 +8,7 @@ services:
       - 'PORT=3000'
     image: 'fanney13/tictactoe:${GIT_COMMIT}'
     ports:
-      - '3000:3000'
+      - '80:3000'
     depends_on:
       - 'postgres' #Server depends on postgres to be up and running
     links:
@@ -21,4 +21,3 @@ services:
      - "5432:5432"
 
 #Tells you it runs in produtionmode.
-
