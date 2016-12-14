@@ -52,7 +52,7 @@ module.exports=function(injected){
             });
         },
         loadEvents:function(aggregateId, errCb, successCb){
-//            var startTimer = new Date().getTime();
+           // var startTimer = new Date().getTime();
             dbPool.connect(function(err, connection, done) {
                 if(err) {
                     return console.error('error fetching db connection from pool', err);

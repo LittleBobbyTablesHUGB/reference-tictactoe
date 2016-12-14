@@ -30,7 +30,7 @@ module.exports=function(injected){
                 });
 
                 statement = "DELETE FROM commandlog";
-            // console.debug(statement);
+                  // console.debug(statement);
 
 
                     connection.query(statement,statementParams, function(err, result) {
