@@ -123,7 +123,7 @@ describe("Game command handler", function () {
 
     });
 
-    it('should route resulting events to event router with all relevant information',function(){
+    fit('should route resulting events to event router with all relevant information',function(){
         commandRouter.routeMessage({
             gameId:"thisIsTheGame",
             _session :{
