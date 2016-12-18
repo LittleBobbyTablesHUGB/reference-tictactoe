@@ -10,6 +10,7 @@ module.exports = function(injected){
             executeCommand: function(cmd, eventHandler){
 
                 var cmdHandlers = {
+
                     "CreateGame": function (cmd) {
                         eventHandler([{
                             gameId: cmd.gameId,
@@ -18,9 +19,9 @@ module.exports = function(injected){
                             name: cmd.name,
                             timeStamp: cmd.timeStamp,
                             side:'X'
-                        }]);
+                      }]);
 
-                    },
+                   },
                     "JoinGame": function (cmd) {
                         if(gameState.gameFull()){
                             eventHandler( [{
@@ -32,29 +33,46 @@ module.exports = function(injected){
                             }]);
                             return;
                         }
-
                         eventHandler([{
-                            gameId: cmd.gameId,
-                            type: "GameJoined",
-                            user: cmd.user,
-                            name: cmd.name,
-                            timeStamp: cmd.timeStamp,
-                            side:'O'
+                          gameId: cmd.gameId,
+                          type: "GameJoined",
+                          user: cmd.user,
+                          name: cmd.name,
+                          timeStamp: cmd.timeStamp,
+                          side:'O'
                         }]);
                     },
                     "PlaceMove": function(cmd){
-                        if(gameState.Board()){
-                          eventHandler( [{
+
+                    if(!gameState.isPlayersTurn(cmd.side)){
+
+                       eventHandler( [{
+                         gameId: cmd.gameId,
+                         type: "NotYourMove",
+                         user: cmd.user,
+                         name: cmd.name,
+                         timeStamp: cmd.timeStamp,
+                         side: cmd.side
+                       }]);
+                      return;
+                    }
+
+
+
+                          var event = [{
                             gameId: cmd.gameId,
                             type: "MovePlaced",
                             user: cmd.user,
                             name: cmd.name,
                             timeStamp: cmd.timeStamp,
+                            placeAt: cmd.placeAt,
                             side:cmd.side
 
-                          }]);
-                          return;
-                        }
+                          }];
+                          gameState.processEvents(event);
+
+                      }
+                    };
 
                         // Check here for conditions which prevent command from altering state
 
@@ -62,14 +80,14 @@ module.exports = function(injected){
 
                         // Check here for conditions which may warrant additional events to be emitted.
                         //eventHandler(events);
-                    }
-                };
+
+
 
                 if(!cmdHandlers[cmd.type]){
                     throw new Error("I do not handle command of type " + cmd.type)
                 }
                 cmdHandlers[cmd.type](cmd);
-            }
-        }
+              }
+          }
     }
 };
